@@ -1,4 +1,3 @@
-import React from 'react';
 import { Block, Container } from './FooterStyle';
 import { useGetData } from '../../context/generalContext';
 export const Footer = () => {

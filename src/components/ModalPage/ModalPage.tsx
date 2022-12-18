@@ -1,36 +1,27 @@
-import React from 'react';
 import { Container, ContainerForBtn } from './ModalPageStyle';
 import { useGetData, useGetListOfChose } from '../../context/generalContext';
 import { useCloseModal } from '../../hooks/useCloseModal';
 import { useDispatch } from '../../context/generalContext';
 import { actions } from '../../context/generalActions';
+import { getNameOflist } from '../../helper/getNameOflList';
+import { removeProducts } from '../../helper/removeProduct';
 export const ModalPage = () => {
   const data = useGetData();
   const dispatch = useDispatch();
   const { setData } = actions;
   const list = useGetListOfChose();
   const { closeModal } = useCloseModal();
-  const getNameOflist = () => {
-    return data.reduce((acc, elem) => {
-      if (list.includes(elem.id)) {
-        return (acc += elem.name + ' ');
-      }
-      return acc;
-    }, '');
-  };
-  const removeProducts = () => {
-    return data.filter((elem) => !list.includes(elem.id));
+  const removeAndClose = () => {
+    dispatch(setData(removeProducts(data, list)));
     closeModal();
   };
-
-  const names = getNameOflist();
+  const names = getNameOflist(data, list);
   return (
     <Container>
-      <div>Вы уверены что хотите аннулировать товар(ы): {names}</div>
+      <div>Вы уверены что хотите аннулировать товар(ы):</div>
+      <div>{names.slice(0, names.length - 2) + ';'}</div>
       <ContainerForBtn>
-        <button onClick={() => dispatch(setData(removeProducts()))}>
-          Подтвердить
-        </button>
+        <button onClick={removeAndClose}>Подтвердить</button>
         <button onClick={closeModal}>Отказать</button>
       </ContainerForBtn>
     </Container>

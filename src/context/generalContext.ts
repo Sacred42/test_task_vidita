@@ -2,7 +2,7 @@ import { Reducer, useReducer } from 'react';
 import { Data, GeneralActions, GeneralState } from '../types/types';
 import { createContainer } from 'react-tracked';
 import { reducer } from './generalActions';
-
+import { sortDate } from '../helper/sortDate';
 export const state = {
   data: [] as Data[],
   modalIsOpen: false,
