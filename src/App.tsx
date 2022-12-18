@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useCallback } from 'react';
+import { Modal } from './ui/Modal/Modal';
 import './App.css';
+import { Table } from './components/Table/Table';
+import { mockData } from './services/data';
+import { Search } from './components/Search/Search';
+import { useDispatch, useGetStatusModal } from './context/generalContext';
+import { actions } from './context/generalActions';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
+  const dispatch = useDispatch();
+  const modalStatus = useGetStatusModal();
+  const { setData, setStatusModal } = actions;
+  useEffect(() => {
+    dispatch(setData(mockData));
+  }, []);
+  const openModal = () => {
+    dispatch(setStatusModal(true));
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search />
+      <Table />
+      <Footer />
+      {modalStatus && <Modal />}
+      <button onClick={openModal}>анулировать</button>
     </div>
   );
 }
