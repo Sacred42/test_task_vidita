@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
-export const CheckboxInput = styled.input.attrs({ type: 'checkbox' })``;
-
-export const Container = styled.div`
+type PropsContainer = { top?: string };
+export const ContainerInput = styled.div<PropsContainer>`
+  ${({ top }) => `{
   position: absolute;
+  top: ${top};
+}`}
 `;

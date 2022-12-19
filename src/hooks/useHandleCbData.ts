@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch } from '../context/generalContext';
 import { actions } from '../context/generalActions';
 import { useGetListOfChose } from '../context/generalContext';

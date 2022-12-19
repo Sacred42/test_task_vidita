@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import { Row, Block, Container } from './TableStyle';
-import { CheckBox } from '../../ui/CheckBox/CheckBox';
 import { useActivateData } from '../../hooks/useActivateData';
+import { ContainerInput } from '../../ui/CheckBox/CheckBoxStyle';
 import { useGetData, useGetListOfChose } from '../../context/generalContext';
 import { Search } from '../Search/Search';
+import { useHandleCbData } from '../../hooks/useHandleCbData';
 export const Table = () => {
   const namesOfColumns = [
     'status',
@@ -17,7 +18,7 @@ export const Table = () => {
   ];
   const data = useGetData();
   const list = useGetListOfChose();
-  console.log(list, 'list');
+  const { handleCheckBox } = useHandleCbData();
   const { handleActivate } = useActivateData();
   const compositionData = () => {
     return data.map((elem) => {
@@ -28,7 +29,15 @@ export const Table = () => {
             return <Block key={`${val}valueOfData`}>{val}</Block>;
           })}
           <Block>{`${elem.qty * elem.sum} ${elem.currency}`}</Block>
-          <CheckBox checked={list.includes(elem.id)} id={elem.id} />
+          <ContainerInput>
+            <input
+              onChange={() => handleCheckBox(list.includes(elem.id), elem.id)}
+              checked={list.includes(elem.id)}
+              type="checkbox"
+              name=""
+              id={elem.id}
+            />
+          </ContainerInput>
         </Row>
       );
     });
@@ -37,8 +46,10 @@ export const Table = () => {
 
   return (
     <Container>
-      <Row>
+      <ContainerInput top={'35px'}>
         <input onChange={handleActivate} type="checkbox" name="" id="" />
+      </ContainerInput>
+      <Row>
         {namesOfColumns.map((name) => (
           <div key={`${name}NameOfTable`}>
             <Search name={name} />
