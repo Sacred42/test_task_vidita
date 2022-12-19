@@ -1,5 +1,6 @@
 export const SET_DATA = 'SET_DATA';
 export const SET_LIST_OF_CHOSE = 'SET_LIST_OF_CHOSE';
 export const REMOVE_LIST_OF_CHOSE = 'REMOVE_LIST_OF_CHOSE';
+export const ACTIVATE_ALL_DATA = 'ACTIVATE_ALL_DATA';
 export const SET_STATUS_MODAL = 'SET_STATUS_MODAL';
 export const SET_FILTER = 'SET_FILTER';

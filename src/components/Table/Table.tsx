@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { Row, Block, Container } from './TableStyle';
 import { CheckBox } from '../../ui/CheckBox/CheckBox';
-import { useGetData } from '../../context/generalContext';
+import { useActivateData } from '../../hooks/useActivateData';
+import { useGetData, useGetListOfChose } from '../../context/generalContext';
 import { Search } from '../Search/Search';
 export const Table = () => {
   const namesOfColumns = [
@@ -15,6 +16,9 @@ export const Table = () => {
     'total',
   ];
   const data = useGetData();
+  const list = useGetListOfChose();
+  console.log(list, 'list');
+  const { handleActivate } = useActivateData();
   const compositionData = () => {
     return data.map((elem) => {
       return (
@@ -24,16 +28,17 @@ export const Table = () => {
             return <Block key={`${val}valueOfData`}>{val}</Block>;
           })}
           <Block>{`${elem.qty * elem.sum} ${elem.currency}`}</Block>
-          <CheckBox id={elem.id} />
+          <CheckBox checked={list.includes(elem.id)} id={elem.id} />
         </Row>
       );
     });
   };
-  const newData = useMemo(() => compositionData(), [data.length]);
+  const newData = useMemo(() => compositionData(), [data.length, list.length]);
 
   return (
     <Container>
       <Row>
+        <input onChange={handleActivate} type="checkbox" name="" id="" />
         {namesOfColumns.map((name) => (
           <div key={`${name}NameOfTable`}>
             <Search name={name} />

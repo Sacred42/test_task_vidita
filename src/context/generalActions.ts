@@ -4,6 +4,7 @@ import {
   REMOVE_LIST_OF_CHOSE,
   SET_STATUS_MODAL,
   SET_FILTER,
+  ACTIVATE_ALL_DATA,
 } from '../constants/constants';
 import { GeneralState, GeneralActions, Data } from '../types/types';
 
@@ -31,6 +32,11 @@ export const actions = {
   setFilter: (payload: Partial<Data>) =>
     ({
       type: SET_FILTER,
+      payload,
+    } as const),
+  activateAllData: (payload: string[]) =>
+    ({
+      type: ACTIVATE_ALL_DATA,
       payload,
     } as const),
 };
@@ -68,6 +74,12 @@ export const reducer = (
       return {
         ...state,
         filterOfSearch: { ...state.filterOfSearch, ...action.payload },
+      };
+    }
+    case ACTIVATE_ALL_DATA: {
+      return {
+        ...state,
+        listOfChosen: [...action.payload],
       };
     }
     default:
