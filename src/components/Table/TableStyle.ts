@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 export const Block = styled.div`
   border: 1px solid green;
-  width: 100px;
-  height: 25px;
+  width: 98px;
+  height: 40px;
 `;
 
 export const Row = styled.div`
@@ -10,9 +10,5 @@ export const Row = styled.div`
 `;
 
 export const Container = styled.div`
-  // position: absolute;
-  // left: 50%;
-  // top: 50%;
-  // transform: translate(-50%, -50%);
   text-align: center;
 `;

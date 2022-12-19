@@ -8,11 +8,13 @@ import { removeProducts } from '../../helper/removeProduct';
 export const ModalPage = () => {
   const data = useGetData();
   const dispatch = useDispatch();
-  const { setData } = actions;
+  const { setData, removeListOfChosen } = actions;
   const list = useGetListOfChose();
   const { closeModal } = useCloseModal();
   const removeAndClose = () => {
     dispatch(setData(removeProducts(data, list)));
+
+    dispatch(removeListOfChosen(list.length));
     closeModal();
   };
   const names = getNameOflist(data, list);

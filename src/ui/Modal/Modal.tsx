@@ -9,7 +9,7 @@ export const Modal = () => {
   const elementRef = useRef<HTMLDivElement | null>(null);
   const [isContainerReady, setIsContainerReady] = useState(false);
   const { closeModal } = useCloseModal();
-  const escFunction = useCallback((event: any) => {
+  const escFunction = useCallback((event: KeyboardEvent) => {
     if (event.keyCode === 27) {
       closeModal();
     }

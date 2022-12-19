@@ -2,11 +2,12 @@ import { Reducer, useReducer } from 'react';
 import { Data, GeneralActions, GeneralState } from '../types/types';
 import { createContainer } from 'react-tracked';
 import { reducer } from './generalActions';
-import { sortDate } from '../helper/sortDate';
 export const state = {
   data: [] as Data[],
   modalIsOpen: false,
   listOfChosen: [] as string[],
+  filterOfSearch: {} as Partial<Data>,
+  isRemoved: 0,
 };
 
 const useGeneralState = () =>
@@ -25,3 +26,8 @@ export const useGetListOfChose = () =>
 
 export const useGetStatusModal = () =>
   useSelector((state) => state.modalIsOpen);
+
+export const useGetFilterList = () =>
+  useSelector((state) => state.filterOfSearch);
+
+export const useGetRemovedCount = () => useSelector((state) => state.isRemoved);

@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Row, Block, Container } from './TableStyle';
 import { CheckBox } from '../../ui/CheckBox/CheckBox';
 import { useGetData } from '../../context/generalContext';
+import { Search } from '../Search/Search';
 export const Table = () => {
   const namesOfColumns = [
     'status',
@@ -34,7 +35,10 @@ export const Table = () => {
     <Container>
       <Row>
         {namesOfColumns.map((name) => (
-          <Block key={`${name}NameOfTable`}>{name}</Block>
+          <div key={`${name}NameOfTable`}>
+            <Search name={name} />
+            <Block>{name}</Block>
+          </div>
         ))}
       </Row>
       {newData}

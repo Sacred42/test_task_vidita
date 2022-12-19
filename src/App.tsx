@@ -3,7 +3,6 @@ import { BtnDelete } from './ui/BtnDelete/BtnDelete';
 import './App.css';
 import { Table } from './components/Table/Table';
 import { mockData } from './services/data';
-import { Search } from './components/Search/Search';
 import { useDispatch } from './context/generalContext';
 import { actions } from './context/generalActions';
 import { Footer } from './components/Footer/Footer';
@@ -16,7 +15,6 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <Search />
       <Table />
       <Footer />
       <BtnDelete />
